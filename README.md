@@ -10,6 +10,26 @@ A cloud-based RESTful inference API that serves a pre-trained **ResNet-50** conv
 
 ---
 
+## 📸 Project Screenshots
+
+### Swagger Documentation
+
+![Swagger Docs](03_cloud_deployment_benchmarking/screenshots/swagger_docs.png)
+
+### Health Endpoint Response
+
+![Health Response](03_cloud_deployment_benchmarking/screenshots/health_response.png)
+
+### Benchmark - 5 Users
+
+![Benchmark 5 Users](03_cloud_deployment_benchmarking/screenshots/benchmark_5_users.jpeg)
+
+### Benchmark - 10 Users
+
+![Benchmark 10 Users](03_cloud_deployment_benchmarking/screenshots/benchmark_10_users.png)
+
+``
+
 # Live API
 
 | Endpoint | URL |
