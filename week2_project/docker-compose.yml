@@ -1,0 +1,56 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  docker-compose.yml
+#  Defines the full local development and testing stack.
+#
+#  Usage:
+#    docker compose up --build        ← build image + start
+#    docker compose up -d             ← run in background
+#    docker compose down              ← stop and remove containers
+#    docker compose logs -f api       ← stream logs
+# ─────────────────────────────────────────────────────────────────────────────
+
+version: "3.9"
+
+services:
+
+  # ── Main inference API ──────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime          # Use the slim runtime stage
+    image: medical-inference-api:latest
+    container_name: inference_api
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"            # host_port:container_port
+
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=info
+
+    volumes:
+      # Cache the downloaded model weights so they survive container restarts
+      - model_cache:/home/appuser/.cache/torch
+
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s        # Give PyTorch time to download model weights
+
+    # Resource limits — keeps the container well-behaved on a shared EC2 instance
+    deploy:
+      resources:
+        limits:
+          memory: 2g
+        reservations:
+          memory: 512m
+
+# ── Named volumes ─────────────────────────────────────────────────────────────
+volumes:
+  model_cache:
+    driver: local

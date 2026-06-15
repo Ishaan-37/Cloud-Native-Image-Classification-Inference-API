@@ -1,0 +1,25 @@
+# ─────────────────────────────────────────────────────────────
+#  requirements.txt
+#  Summer Internship Project – Week 1
+#  Medical Image Inference API (ResNet-50 / FastAPI)
+# ─────────────────────────────────────────────────────────────
+
+# Web framework & ASGI server
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Deep learning
+torch==2.3.0
+torchvision==0.18.0
+
+# Image handling
+Pillow==10.3.0
+
+# Data validation (FastAPI uses this internally)
+pydantic==2.7.1
+
+# Multipart file uploads
+python-multipart==0.0.9
+
+# HTTP requests (optional – used for downloading labels if needed)
+requests==2.32.2
