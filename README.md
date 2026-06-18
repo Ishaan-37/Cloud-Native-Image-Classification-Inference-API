@@ -1,5 +1,4 @@
-# Medical Image Inference API
-
+# Cloud-Native Image Classification Inference API
 A cloud-based RESTful inference API that serves a pre-trained **ResNet-50** convolutional neural network for automated image classification. Built as part of the **IIT Jammu Summer Internship 2026**.
 
 > **Student:** Ishaan Maurya — B.Tech. Cloud Computing and Automation, VIT Bhopal (Summer Intern, IIT Jammu)
